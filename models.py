@@ -3,14 +3,14 @@ from django.core.urlresolvers import reverse
 
 class League(models.Model):
     # Unique name of sport
-    name     = models.CharField('League', max_length=64)
+    name     = models.CharField('League', max_length=64, unique=True)
     # Whether a high score wins
     highWins = models.BooleanField('High Score Wins', default=True)
 
 
 class Team(models.Model):
     # Unique short/abbreviated name of team
-    name     = models.CharField('Team', max_length=16)
+    name     = models.CharField('Team', max_length=16, unique=True)
     # Long descriptive name
     longName = models.CharField('Long Name', max_length=64)
     # Optional home region/city/state
