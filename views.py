@@ -1,6 +1,14 @@
 from common import core
 
 
+def dashboard(request):
+    ''' Admin dashboard for gametracker '''
+    pass
+
+def public_view(request):
+    ''' Public page for gametracker '''
+    pass
+
 def editor_league_list(request):
     ''' Top-level editor for leagues '''
     pass

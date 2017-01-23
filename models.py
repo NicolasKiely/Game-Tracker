@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
+
+# Sports/Game league
 class League(models.Model):
     # Unique name of sport
     name     = models.CharField('League', max_length=64, unique=True)
@@ -8,6 +10,7 @@ class League(models.Model):
     highWins = models.BooleanField('High Score Wins', default=True)
 
 
+# Team in a league
 class Team(models.Model):
     # Unique short/abbreviated name of team
     name     = models.CharField('Team', max_length=16, unique=True)
@@ -17,6 +20,7 @@ class Team(models.Model):
     home     = models.CharField('Team Home', max_length=64)
 
 
+# Season or time period of sequential matches in league
 class Season(models.Model):
     # Year of matches
     year     = models.CharField('Year', max_length=4)
@@ -26,14 +30,21 @@ class Season(models.Model):
     fkLeague = models.ForeignKey(League, on_delete=models.CASCADE)
 
 
-# Instead of using the round number directly
+# Match in season involving team
 class Match(models.Model):
-    # Numerical
+    # Sequential round number
     round    = models.IntegerField()
+    # Season of match
     fkSeason = models.ForeignKey(Season, on_delete=models.CASCADE)
+    # Date of match, optional
+    date = models.DateField(null=True)
 
 
+# Participation and score of a team in a match
 class Participation(models.Model):
+    # Score of team, or null if not played [yet]
     score   = models.IntegerField(null=True)
+    # Match team played in, or will play in
     fkMatch = models.ForeignKey(Match, on_delete=models.CASCADE)
+    # Team involved in match
     fkTeam  = models.ForeignKey(Team, on_delete=models.CASCADE)
