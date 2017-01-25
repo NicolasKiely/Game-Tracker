@@ -1,9 +1,15 @@
 from common import core
+from .models import League
 
 
 def dashboard(request):
     ''' Admin dashboard for gametracker '''
-    pass
+    context = {
+        'title'  : 'Game Tracker Dashboard',
+        'leagues': League.objects.all()
+    }
+    return core.render(request, 'gametracker/dashboard.html', **context)
+
 
 def public_view(request):
     ''' Public page for gametracker '''
@@ -11,7 +17,9 @@ def public_view(request):
 
 def editor_league_list(request):
     ''' Top-level editor for leagues '''
-    pass
+    context = {
+    }
+    return core.render(request, 'gametracker/leagueManager.html', **context)
 
 
 def editor_league(request):
@@ -27,4 +35,8 @@ def edit_league(request):
 
 
 def add_league(request):
+    pass
+
+
+def editor_team_list(request):
     pass

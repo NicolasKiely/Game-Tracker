@@ -18,6 +18,8 @@ class Team(models.Model):
     longName = models.CharField('Long Name', max_length=64)
     # Optional home region/city/state
     home     = models.CharField('Team Home', max_length=64)
+    # League team participates in
+    fkLeague = models.ForeignKey(League, on_delete=models.CASCADE)
 
 
 # Season or time period of sequential matches in league
