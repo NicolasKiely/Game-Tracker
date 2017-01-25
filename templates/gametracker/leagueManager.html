@@ -1,0 +1,59 @@
+{% extends "common/base.html" %}
+{% load core %}
+{# Displays admin dashboard for game tracker app #}
+
+{% block html_body %}
+  {% open_box %}
+    <h2>League Manager</h2>
+    <div class="text-center">
+      <a href="{% url 'gametracker:dashboard' %}">Back to Dashboard</a>
+    </div>
+  {% close_box %}
+
+  {% open_box %}
+    <h2>Add League</h2>
+
+    {# Form for adding new leagues #}
+    <form id="form_add_new" class="form-horizontal" role="form"
+        action="{% url 'gametracker:add_league' %}" method="post"
+    >{% csrf_token %}
+      <div class="form-group">
+        {# Name field #}
+        <label class="col-sm-3 control-label">Name</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="text" id="add_name" name="name">
+        </div>
+
+        {# High wins field #}
+        <label class="col-sm-3 control-label">High Score Wins?</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="checkbox"
+              id="add_hiwins" name="hiwins" checked="1">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary pull-right">Add New</button>
+    </form>
+  {% close_box %}
+
+  {% open_box %}
+    <h2>Leagues</h2>
+
+    <table class="table table-striped">
+    <tr>
+      <th>League Name</th>
+      <th>Hi Wins</th>
+      <th>URL</th>
+    </tr>
+    {% for league in leagues %}
+    <tr>
+      <td>{{ league.name }}</td>
+      <td>{{ league.highWins }}</td>
+      <td>
+        <a href="{% url 'gametracker:league_editor' league.id %}">Edit</a> |
+        <a href="{% url 'gametracker:league_view' league.id %}">View</a>
+      </td>
+    </tr>
+    {% endfor %}
+    </table>
+  {% close_box %}
+{% endblock %}
