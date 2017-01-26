@@ -1,0 +1,9 @@
+{% extends "common/base.html" %}
+{% load core %}
+{# Displays admin dashboard for game tracker app #}
+
+{% block html_body %}
+  {% open_box %}
+    <h2>League: <u>{{ league.name }}</u></h2>
+  {% close_box %}
+{% endblock %}

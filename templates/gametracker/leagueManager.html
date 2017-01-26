@@ -50,7 +50,7 @@
       <td>{{ league.highWins }}</td>
       <td>
         <a href="{% url 'gametracker:league_editor' league.id %}">Edit</a> |
-        <a href="{% url 'gametracker:league_view' league.id %}">View</a>
+        <a href="{% url 'gametracker:league_view' league.id %}{{ league.name }}">View</a>
       </td>
     </tr>
     {% endfor %}

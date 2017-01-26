@@ -21,43 +21,5 @@ def public_view(request):
 
 
 @login_required
-def editor_league_list(request):
-    ''' Top-level editor for leagues '''
-    context = {
-        'title'  : 'League Manager',
-        'leagues': League.objects.all()
-    }
-    return core.render(request, 'gametracker/leagueManager.html', **context)
-
-
-@login_required
-def add_league(request):
-    ''' Post for adding league '''
-    lgName = request.POST['name']
-    lgHiWins = True if 'hiwins' in request.POST else False
-
-    league = League(name=lgName, highWins=lgHiWins)
-    league.save()
-
-    return HttpResponseRedirect(
-        reverse('gametracker:league_manager')
-    )
-
-
-@login_required
-def league_editor(request, pk):
-    pass
-
-
-def league_view(request, pk):
-    pass
-
-
-@login_required
-def edit_league(request):
-    pass
-
-
-@login_required
 def editor_team_list(request):
     pass
