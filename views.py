@@ -18,8 +18,3 @@ def dashboard(request):
 def public_view(request):
     ''' Public page for gametracker '''
     pass
-
-
-@login_required
-def editor_team_list(request):
-    pass

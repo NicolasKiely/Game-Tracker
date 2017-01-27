@@ -1,0 +1,13 @@
+{% extends "common/base.html" %}
+{% load core %}
+{# Displays season manager for game tracker app #}
+
+{% block html_body %}
+  {% open_box %}
+    <h2>Season: <u></u></h2>
+    <div class="text-center">
+      <a href="{% url 'gametracker:league_editor' league.id %}">League: {{ league.name }}</a> |
+      <a href="">View Season</a>
+    </div>
+  {% close_box %}
+{% endblock %}

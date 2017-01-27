@@ -1,0 +1,21 @@
+{% extends "common/base.html" %}
+{% load core %}
+{# Displays admin dashboard for game tracker app #}
+
+{% block html_body %}
+  {% open_box %}
+    <h2>League: <u>{{ league.name }}</u></h2>
+    <div class="text-center">
+      <a href="{% url 'gametracker:league_manager' %}">League Manager</a> |
+      <a href="{% url 'gametracker:league_view' league.id %}{{league.name }}">View</a>
+    </div>
+  {% close_box %}
+
+  {% open_box %}
+    <h2><a href="{% url 'gametracker:season_manager' league.id %}">Seasons</a></h2>
+  {% close_box %}
+
+  {% open_box %}
+    <h2><a href="{% url 'gametracker:team_manager' league.id %}">Teams</a></h2>
+  {% close_box %}
+{% endblock %}
