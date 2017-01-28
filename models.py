@@ -16,6 +16,10 @@ class League(models.Model):
     def view_link(self):
         return view_link('gametracker:league_view', (self.pk,), self.name)
 
+    def manager_link(self):
+        link_url = reverse('gametracker:league_editor', args=(self.id,))
+        return '<a href="'+ link_url +'">League: '+ self.name +'</a>'
+
 
 # Team in a league
 class Team(models.Model):
@@ -35,6 +39,9 @@ class Team(models.Model):
         ''' Returns anchor link for view '''
         return view_link('gametracker:team_view', (self.pk,), self.longName)
 
+    def nav_link(self):
+        return self.fkLeague.manager_link() +' | '+ self.view_link()
+
 
 # Season or time period of sequential matches in league
 class Season(models.Model):
@@ -48,6 +55,9 @@ class Season(models.Model):
 
     def view_link(self):
         return view_link('gametracker:season_view', (self.pk,), self.name)
+
+    def nav_link(self):
+        return self.fkLeague.manager_link() +' | '+ self.view_link()
 
 
 # Match in season involving team

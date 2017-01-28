@@ -71,6 +71,7 @@ def delete(request):
         reverse('gametracker:team_manager', args=(team.fkLeague.id,))
     )
 
+
 def view(request, pk):
     ''' Public view of team '''
     pass

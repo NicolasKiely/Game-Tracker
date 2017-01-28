@@ -18,9 +18,11 @@ urlpatterns = [
     # Season pages
     url(r'^league/(?P<pkLeague>\d+)/season/editor/$',
         season_views.editor_list, name='season_manager'),
-    url(r'^season/add/$', season_views.add, name='add_season'),
     url(r'^season/editor/(?P<pk>\d+)/\w*$', season_views.editor, name='season_editor'),
     url(r'^season/view/(?P<pk>\d+)/\w*$', season_views.view, name='season_view'),
+    url(r'^season/add/$', season_views.add, name='add_season'),
+    url(r'^season/edit/$', season_views.edit, name='edit_season'),
+    url(r'^season/delete/$', season_views.delete, name='delete_season'),
 
     # Team pages
     url(r'^league/(?P<pkLeague>\d+)/team/editor/$',

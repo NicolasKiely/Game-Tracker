@@ -21,7 +21,13 @@ def editor_list(request, pkLeague):
 @login_required
 def editor(request, pk):
     ''' Editor for season '''
-    pass
+    season = get_object_or_404(Season, pk=pk)
+    context = {
+        'title' : 'Season Editor',
+        'season': season,
+        'league': season.fkLeague
+    }
+    return core.render(request, 'gametracker/seasonEditor.html', **context)
 
 
 @login_required
@@ -36,6 +42,28 @@ def add(request):
 
     return HttpResponseRedirect(
         reverse('gametracker:season_manager', args=(league_id,))
+    )
+
+
+@login_required
+def edit(request):
+    season = get_object_or_404(Season, pk=request.POST['seasonid'])
+    season.name = request.POST['name']
+    season.save()
+
+    return HttpResponseRedirect(
+        reverse('gametracker:season_manager', args=(season.fkLeague.id,))
+    )
+
+
+@login_required
+def delete(request):
+    ''' Post for deleting season '''
+    season = get_object_or_404(Season, pk=request.POST['seasonid'])
+    season.delete()
+
+    return HttpResponseRedirect(
+        reverse('gametracker:season_manager', args=(season.fkLeague.id,))
     )
 
 

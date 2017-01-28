@@ -1,0 +1,47 @@
+{% extends "common/base.html" %}
+{% load core %}
+{# Displays season editor for game tracker app #}
+
+{% block html_body %}
+  {# Title/Nav #}
+  {% open_box %}
+    <h2>Season: <u>{{ season.name }}</u></h2>
+    <div class="text-center">
+      {{ season.nav_link | safe }}
+    </div>
+  {% close_box %}
+
+  {# Main editor form #}
+  {% open_box %}
+    <h2>Editor</h2>
+    <form class="form-horizontal" role="form"
+        action="{% url 'gametracker:edit_season' %}" method="post"
+    >{% csrf_token %}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Name:</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="text" id="edit_name"
+              name="name" value="{{ season.name }}">
+        </div>
+        <input type="hidden" name="seasonid" value="{{ season.id }}">
+      </div>
+
+      <button type="submit" class="btn btn-primary pull-right">Update</button>
+    </form>
+  {% close_box %}
+
+  {# Delete form #}
+  {% open_box %}
+    <h2>Delete</h2>
+
+    <form id="form_del" class="form-horizontal" role="form"
+        action="{% url 'gametracker:delete_season' %}" method="post"
+    >{% csrf_token %}
+      <input type="hidden" name="seasonid" value="{{ season.id }}">
+      <button onclick="return confirm('Delete season?')"
+          type="submit" class="btn btn-primary pull-right">
+        Delete
+      </button>
+    </form>
+  {% close_box %}
+{% endblock %}

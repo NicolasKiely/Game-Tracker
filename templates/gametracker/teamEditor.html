@@ -3,14 +3,15 @@
 {# Displays team editor for game tracker app #}
 
 {% block html_body %}
+  {# Title/Nav #}
   {% open_box %}
     <h2>Team: <u>{{ team.home }} {{ team.longName }} ({{ team.name }})</u></h2>
     <div class="text-center">
-      <a href="{% url 'gametracker:league_editor' league.id %}">League: {{ league.name }}</a> |
-      <a href="{% url 'gametracker:team_view' league.id %}">View Team</a>
+      {{ team.nav_link | safe }}
     </div>
   {% close_box %}
 
+  {# Main editor form #}
   {% open_box %}
     <h2>Editor</h2>
     <form id="form_edit" class="form-horizontal" role="form"
@@ -41,7 +42,8 @@
       <button type="submit" class="btn btn-primary pull-right">Update</button>
     </form>
   {% close_box %}
-
+  
+  {# Delete form #}
   {% open_box %}
     <h2>Delete</h2>
 
