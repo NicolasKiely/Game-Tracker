@@ -14,7 +14,7 @@
   {% open_box %}
     <h2>Editor</h2>
     <form id="form_edit" class="form-horizontal" role="form"
-      action="{% url 'gametracker:edit_team' %}" method="post"
+        action="{% url 'gametracker:edit_team' %}" method="post"
     >{% csrf_token %}
       <div class="form-group">
         <label class="col-sm-3 control-label">Name:</label>
@@ -39,6 +39,20 @@
       </div>
 
       <button type="submit" class="btn btn-primary pull-right">Update</button>
+    </form>
+  {% close_box %}
+
+  {% open_box %}
+    <h2>Delete</h2>
+
+    <form id="form_del" class="form-horizontal" role="form"
+        action="{% url 'gametracker:delete_team' %}" method="post"
+    >{% csrf_token %}
+      <input type="hidden" name="teamid" value="{{ team.id }}">
+      <button onclick="return confirm('Delete team?')"
+          type="submit" class="btn btn-primary pull-right">
+        Delete
+      </button>
     </form>
   {% close_box %}
 {% endblock %}

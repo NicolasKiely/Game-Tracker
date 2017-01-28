@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^team/editor/(?P<pk>\d+)/\w*$', team_views.editor, name='team_editor'),
     url(r'^team/view/(?P<pk>\d+)/\w*$', team_views.view, name='team_view'),
     url(r'^team/add/$', team_views.add, name='add_team'),
-    url(r'^team/edit/$', team_views.edit, name='edit_team')
+    url(r'^team/edit/$', team_views.edit, name='edit_team'),
+    url(r'^team/delete/$', team_views.delete, name='delete_team')
 ]

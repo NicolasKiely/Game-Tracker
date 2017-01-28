@@ -60,6 +60,17 @@ def edit(request):
         reverse('gametracker:team_manager', args=(team.fkLeague.id,))
     )
 
+
+@login_required
+def delete(request):
+    ''' Post for deleting team data '''
+    team = get_object_or_404(Team, pk=request.POST['teamid'])
+    team.delete()
+
+    return HttpResponseRedirect(
+        reverse('gametracker:team_manager', args=(team.fkLeague.id,))
+    )
+
 def view(request, pk):
     ''' Public view of team '''
     pass
