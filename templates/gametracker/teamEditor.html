@@ -1,0 +1,42 @@
+{% extends "common/base.html" %}
+{% load core %}
+{# Displays team editor for game tracker app #}
+
+{% block html_body %}
+  {% open_box %}
+    <h2>Team: <u>{{ team.home }} {{ team.longName }} ({{ team.name }})</u></h2>
+    <div class="text-center">
+      <a href="{% url 'gametracker:league_editor' league.id %}">League: {{ league.name }}</a> |
+      <a href="{% url 'gametracker:team_view' league.id %}">View Team</a>
+    </div>
+  {% close_box %}
+
+  {% open_box %}
+    <h2>Editor</h2>
+    <form id="form_edit" class="form-horizontal" role="form"
+      action="" method="post"
+    >{% csrf_token %}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Name:</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="text" id="edit_name"
+              name="name" value="{{ team.name }}">
+        </div>
+
+        <label class="col-sm-3 control-label">Long Name:</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="text" id="edit_long"
+              name="long" value="{{ team.longName }}">
+        </div>
+
+        <label class="col-sm-3 control-label">Home:</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="text" id="edit_home"
+              name="home" value="{{ team.home }}">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary pull-right">Update</button>
+    </form>
+  {% close_box %}
+{% endblock %}

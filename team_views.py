@@ -21,7 +21,13 @@ def editor_list(request, pkLeague):
 @login_required
 def editor(request, pk):
     ''' Editor for team '''
-    pass
+    team = get_object_or_404(Team, pk=pk)
+    context = {
+        'title' : 'Team Editor',
+        'team'  : team,
+        'league': team.fkLeague
+    }
+    return core.render(request, 'gametracker/teamEditor.html', **context)
 
 
 @login_required
