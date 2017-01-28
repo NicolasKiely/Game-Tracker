@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from common.core import view_link, edit_link
 
 
 # Sports/Game league
@@ -21,6 +22,13 @@ class Team(models.Model):
     # League team participates in
     fkLeague = models.ForeignKey(League, on_delete=models.CASCADE)
 
+    def edit_link(self):
+        return edit_link('gametracker:team_editor', (self.pk,))
+
+    def view_link(self):
+        ''' Returns anchor link for view '''
+        return view_link('gametracker:team_view', (self.pk,), self.longName)
+
 
 # Season or time period of sequential matches in league
 class Season(models.Model):
@@ -28,6 +36,12 @@ class Season(models.Model):
     name     = models.CharField('Season', max_length=64, unique=True)
     # League this season is for
     fkLeague = models.ForeignKey(League, on_delete=models.CASCADE)
+
+    def edit_link(self):
+        return edit_link('gametracker:season_editor', (self.pk,))
+
+    def view_link(self):
+        return view_link('gametracker:season_view', (self.pk,), self.name)
 
 
 # Match in season involving team

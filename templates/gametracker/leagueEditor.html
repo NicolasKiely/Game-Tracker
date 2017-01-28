@@ -11,11 +11,39 @@
     </div>
   {% close_box %}
 
+  {# Seasons list #}
   {% open_box %}
     <h2><a href="{% url 'gametracker:season_manager' league.id %}">Seasons</a></h2>
+
+    <table class="table table-striped">
+      <tr>
+        <th>Season</th>
+        <th>URL</th>
+      </tr>
+      {% for season in seasons %}
+      <tr>
+        <td>{{ season.name }}</td>
+        <td>{{ season.edit_link | safe }} | {{ season.view_link | safe }}</td>
+      </tr>
+      {% endfor %}
+    </table>
   {% close_box %}
 
+  {# Teams list #}
   {% open_box %}
     <h2><a href="{% url 'gametracker:team_manager' league.id %}">Teams</a></h2>
+    
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>URL</th>
+      </tr>
+      {% for team in teams %}
+      <tr>
+        <td>{{ team.longName }}</td>
+        <td>{{ team.edit_link | safe }} | {{ team.view_link | safe }}</td>
+      </tr>
+      {% endfor %}
+    </table>
   {% close_box %}
 {% endblock %}

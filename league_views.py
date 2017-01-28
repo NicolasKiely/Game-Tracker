@@ -32,9 +32,12 @@ def add(request):
 
 @login_required
 def editor(request, pk):
+    league = get_object_or_404(League, pk=pk)
     context = {
         'title': 'League',
-        'league': get_object_or_404(League, pk=pk)
+        'league': league,
+        'seasons': league.season_set.all(),
+        'teams': league.team_set.all()
     }
     return core.render(request, 'gametracker/leagueEditor.html', **context)
 
