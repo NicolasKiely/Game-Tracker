@@ -47,6 +47,19 @@ def add(request):
     )
 
 
+@login_required
+def edit(request):
+    ''' Post for editting team data '''
+    team = get_object_or_404(Team, pk=request.POST['teamid'])
+    team.name = request.POST['name']
+    team.lname = request.POST['long']
+    team.home = request.POST['home']
+    team.save()
+
+    return HttpResponseRedirect(
+        reverse('gametracker:team_manager', args=(team.fkLeague.id,))
+    )
+
 def view(request, pk):
     ''' Public view of team '''
     pass

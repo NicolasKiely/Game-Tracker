@@ -25,7 +25,8 @@ urlpatterns = [
     # Team pages
     url(r'^league/(?P<pkLeague>\d+)/team/editor/$',
         team_views.editor_list, name='team_manager'),
-    url(r'^team/add/$', team_views.add, name='add_team'),
     url(r'^team/editor/(?P<pk>\d+)/\w*$', team_views.editor, name='team_editor'),
-    url(r'^team/view/(?P<pk>\d+)/\w*$', team_views.view, name='team_view')
+    url(r'^team/view/(?P<pk>\d+)/\w*$', team_views.view, name='team_view'),
+    url(r'^team/add/$', team_views.add, name='add_team'),
+    url(r'^team/edit/$', team_views.edit, name='edit_team')
 ]
