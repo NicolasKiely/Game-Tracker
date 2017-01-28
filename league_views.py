@@ -52,7 +52,13 @@ def view(request, pk):
 
 @login_required
 def edit(request):
-    pass
+    league = get_object_or_404(League, pk=request.POST['leagueid'])
+    league.name = request.POST['name']
+    league.highWins = True if 'hiwins' in request.POST else False
+
+    return HttpResponseRedirect(
+        reverse('gametracker:league_manager')
+    )
 
 
 @login_required

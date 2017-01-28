@@ -3,12 +3,39 @@
 {# Displays admin dashboard for game tracker app #}
 
 {% block html_body %}
+  {# Title/Nav #}
   {% open_box %}
     <h2>League: <u>{{ league.name }}</u></h2>
     <div class="text-center">
       <a href="{% url 'gametracker:league_manager' %}">League Manager</a> |
       <a href="{% url 'gametracker:league_view' league.id %}{{league.name }}">View</a>
     </div>
+  {% close_box %}
+  
+  {# Field editor #}
+  {% open_box %}
+    <h2>Editor</h2>
+    
+    <form class="form-horizontal" role="form"
+      action="{% url 'gametracker:edit_league' %}" method="post"
+    >{% csrf_token %}
+      <div class="form-group">
+        {# Name field #}
+        <label class="col-sm-3 control-label">Name</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="text" name="name" value="{{league.name}}">
+        </div>
+
+        {# High wins field #}
+        <label class="col-sm-3 control-label">High Score Wins?</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="checkbox"
+              id="add_hiwins" name="hiwins" checked="1">
+        </div>
+      </div>
+      <input type="hidden" name="leagueid" value="{{league.id}}">
+      <button type="submit" class="btn btn-primary pull-right">Update</button>
+    </form>
   {% close_box %}
 
   {# Seasons list #}
