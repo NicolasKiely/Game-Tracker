@@ -51,10 +51,7 @@
       {% for team in teams %}
       <tr>
         <td>{{ team.longName }}</td>
-        <td>
-          <a href="{% url 'gametracker:team_editor' team.id %}">Edit</a> |
-          <a href="{% url 'gametracker:team_view' team.id %}{{ team.longName }}">View</a>
-        </td>
+        <td>{{ team.edit_link | safe }} | {{ team.view_link | safe }}</td>
       </tr>
       {% endfor %}
     </table>

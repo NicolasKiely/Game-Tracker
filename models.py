@@ -10,6 +10,12 @@ class League(models.Model):
     # Whether a high score wins
     highWins = models.BooleanField('High Score Wins', default=True)
 
+    def edit_link(self):
+        return edit_link('gametracker:league_editor', (self.pk,))
+
+    def view_link(self):
+        return view_link('gametracker:league_view', (self.pk,), self.name)
+
 
 # Team in a league
 class Team(models.Model):

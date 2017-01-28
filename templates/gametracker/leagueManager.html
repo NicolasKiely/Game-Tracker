@@ -48,10 +48,7 @@
     <tr>
       <td>{{ league.name }}</td>
       <td>{{ league.highWins }}</td>
-      <td>
-        <a href="{% url 'gametracker:league_editor' league.id %}">Edit</a> |
-        <a href="{% url 'gametracker:league_view' league.id %}{{ league.name }}">View</a>
-      </td>
+      <td>{{ league.edit_link | safe }} | {{ league.view_link | safe }}</td>
     </tr>
     {% endfor %}
     </table>

@@ -41,10 +41,7 @@
       {% for season in seasons %}
       <tr>
         <td>{{ season.name }}</td>
-        <td>
-          <a href="{% url 'gametracker:season_editor' season.id %}">Edit</a> |
-          <a href="{% url 'gametracker:season_view' season.id %}{{ season.name }}">View</a>
-        </td>
+        <td>{{ season.edit_link | safe }} | {{ season.view_link | safe }}</td>
       </tr>
       {% endfor %}
     </table>

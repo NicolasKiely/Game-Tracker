@@ -40,7 +40,7 @@
       </tr>
       {% for team in teams %}
       <tr>
-        <td>{{ team.longName }}</td>
+        <td>{{ team.home }} {{ team.longName }}</td>
         <td>{{ team.edit_link | safe }} | {{ team.view_link | safe }}</td>
       </tr>
       {% endfor %}
