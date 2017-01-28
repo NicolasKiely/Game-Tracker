@@ -46,4 +46,18 @@
       {% endfor %}
     </table>
   {% close_box %}
+
+  {# Delete League #}
+  {% open_box %}
+    <h2>Delete league</h2>
+    <form class="form-horizontal" role="form"
+        action="{% url 'gametracker:delete_league' %}" method="post"
+    >{% csrf_token %}
+      <input type="hidden" name="leagueid" value="{{ league.id }}">
+      <button onclick="return confirm('Delete league?')"
+          type="submit" class="btn btn-primary pull-right">
+        Delete
+      </button>
+    </form>
+  {% close_box %}
 {% endblock %}

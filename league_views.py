@@ -53,3 +53,13 @@ def view(request, pk):
 @login_required
 def edit(request):
     pass
+
+
+@login_required
+def delete(request):
+    league = get_object_or_404(League, pk=request.POST['leagueid'])
+    league.delete()
+
+    return HttpResponseRedirect(
+        reverse('gametracker:league_manager')
+    )

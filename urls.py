@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^league/editor/(?P<pk>\d+)/\w*$', league_views.editor, name='league_editor'),
     url(r'^league/view/(?P<pk>\d+)/\w*$', league_views.view, name='league_view'),
     url(r'^league/add/$', league_views.add, name='add_league'),
+    url(r'^league/delete/$', league_views.delete, name='delete_league'),
 
     # Season pages
     url(r'^league/(?P<pkLeague>\d+)/season/editor/$',
