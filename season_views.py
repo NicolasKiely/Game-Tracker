@@ -13,6 +13,32 @@ def editor_list(request, pkLeague):
     context = {
         'title'  : 'Season Manager',
         'league' : league,
-        'leagues': league.season_set.all()
+        'seasons': league.season_set.all()
     }
     return core.render(request, 'gametracker/seasonManager.html', **context)
+
+
+@login_required
+def editor(request, pk):
+    ''' Editor for season '''
+    pass
+
+
+@login_required
+def add(request):
+    ''' Post for adding new season '''
+    league_id = request.POST['league']
+    sn_name = request.POST['name']
+
+    league = get_object_or_404(League, pk=league_id)
+    season = Season(name=sn_name, fkLeague=league)
+    season.save()
+
+    return HttpResponseRedirect(
+        reverse('gametracker:season_manager', args=(league_id,))
+    )
+
+
+def view(request, pk):
+    ''' Public view of season '''
+    pass

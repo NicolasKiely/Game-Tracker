@@ -24,10 +24,8 @@ class Team(models.Model):
 
 # Season or time period of sequential matches in league
 class Season(models.Model):
-    # Year of matches
-    year     = models.CharField('Year', max_length=4)
     # Name of season (eg Winter)
-    name     = models.CharField('Season', max_length=64)
+    name     = models.CharField('Season', max_length=64, unique=True)
     # League this season is for
     fkLeague = models.ForeignKey(League, on_delete=models.CASCADE)
 

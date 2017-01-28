@@ -10,4 +10,43 @@
       <a href="">View Season</a>
     </div>
   {% close_box %}
+
+  {% open_box %}
+    <h2>Add Season</h2>
+
+    <form id="form_add_new" class="form-horizontal" role="form"
+        action="{% url 'gametracker:add_season' %}" method="post"
+    >{% csrf_token %}
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Year/Name</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="text" id="add_name" name="name">
+        </div>
+
+        <input type="hidden" value="{{ league.id }}" name="league">
+      </div>
+      <button type="submit" class="btn btn-primary pull-right">Add New</button>
+    </form>
+  {% close_box %}
+
+  {# List of seasons #}
+  {% open_box %}
+    <h2>Seasons</h2>
+
+    <table class="table table-striped">
+      <tr>
+        <th>Season</th>
+        <th>URL</th>
+      </tr>
+      {% for season in seasons %}
+      <tr>
+        <td>{{ season.name }}</td>
+        <td>
+          <a href="{% url 'gametracker:season_editor' season.id %}">Edit</a> |
+          <a href="{% url 'gametracker:season_view' season.id %}{{ season.name }}">View</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% close_box %}
 {% endblock %}
