@@ -1,0 +1,14 @@
+{% extends "common/base.html" %}
+{% load core %}
+{# Displays season editor for game tracker app #}
+
+{% block html_body %}
+  {# Title/Nav #}
+  {% open_box %}
+    <h2>Matches For <u>{{ season.name }}</u></h2>
+    <div class="text-center">
+      <a href="{% url 'gametracker:season_editor' season.id %}">Season Editor</a> |
+      {{ season.nav_link | safe }}
+    </div>
+  {% close_box %}
+{% endblock %}

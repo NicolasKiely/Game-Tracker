@@ -29,6 +29,11 @@
       <button type="submit" class="btn btn-primary pull-right">Update</button>
     </form>
   {% close_box %}
+  
+  {# Schedule #}
+  {% open_box %}
+    <h2><a href="{% url 'gametracker:match_manager' season.id %}">Schedule Manager</a></h2>
+  {% close_box %}
 
   {# Delete form #}
   {% open_box %}

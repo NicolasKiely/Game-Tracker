@@ -3,6 +3,7 @@ from . import views
 from . import league_views
 from . import season_views
 from . import team_views
+from . import match_views
 
 
 urlpatterns = [
@@ -33,5 +34,9 @@ urlpatterns = [
     url(r'^team/view/(?P<pk>\d+)/\w*$', team_views.view, name='team_view'),
     url(r'^team/add/$', team_views.add, name='add_team'),
     url(r'^team/edit/$', team_views.edit, name='edit_team'),
-    url(r'^team/delete/$', team_views.delete, name='delete_team')
+    url(r'^team/delete/$', team_views.delete, name='delete_team'),
+
+    # Schedule pages
+    url(r'^season/(?P<pkSeason>\d+)/match/editor/$',
+        match_views.editor_list, name='match_manager')
 ]
