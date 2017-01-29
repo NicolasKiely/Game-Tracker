@@ -13,7 +13,11 @@ def editor_list(request, pkLeague):
     context = {
         'title'  : 'Season Manager',
         'league' : league,
-        'seasons': league.season_set.all()
+        'seasons': league.season_set.all(),
+        'form'   : {
+            'action': 'gametracker:add_season',
+            'fields': Season(fkLeague=league).to_form_fields()
+        }
     }
     return core.render(request, 'gametracker/seasonManager.html', **context)
 
@@ -25,7 +29,11 @@ def editor(request, pk):
     context = {
         'title' : 'Season Editor',
         'season': season,
-        'league': season.fkLeague
+        'league': season.fkLeague,
+        'form'  : {
+            'action': 'gametracker:edit_season',
+            'fields': season.to_form_fields()
+        }
     }
     return core.render(request, 'gametracker/seasonEditor.html', **context)
 
@@ -33,7 +41,7 @@ def editor(request, pk):
 @login_required
 def add(request):
     ''' Post for adding new season '''
-    league_id = request.POST['league']
+    league_id = request.POST['leagueid']
     sn_name = request.POST['name']
 
     league = get_object_or_404(League, pk=league_id)

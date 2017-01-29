@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from common.core import view_link, edit_link
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # Sports/Game league
@@ -42,6 +43,15 @@ class Team(models.Model):
     def nav_link(self):
         return self.fkLeague.manager_link() +' | '+ self.view_link()
 
+    def to_form_fields(self):
+        return [
+            {'label': 'Name:'     , 'name': 'name'    , 'value': self.name},
+            {'label': 'Long Name:', 'name': 'long'    , 'value': self.longName},
+            {'label': 'Home:'     , 'name': 'home'    , 'value': self.home},
+            {'type' : 'hidden'    , 'name': 'teamid'  , 'value': self.id},
+            {'type' : 'hidden'    , 'name': 'leagueid', 'value': self.fkLeague.id}
+        ]
+
 
 # Season or time period of sequential matches in league
 class Season(models.Model):
@@ -59,6 +69,13 @@ class Season(models.Model):
     def nav_link(self):
         return self.fkLeague.manager_link() +' | '+ self.view_link()
 
+    def to_form_fields(self):
+        return [
+            {'label': 'Name: ', 'name' : 'name'    , 'value': self.name},
+            {'type' : 'hidden', 'name' : 'seasonid', 'value': self.id},
+            {'type' : 'hidden', 'name' : 'leagueid', 'value': self.fkLeague.id}
+        ]
+
 
 # Match in season involving team
 class Match(models.Model):
@@ -68,6 +85,13 @@ class Match(models.Model):
     fkSeason = models.ForeignKey(Season, on_delete=models.CASCADE)
     # Date of match, optional
     date = models.DateField(null=True)
+
+    def to_form_fields(self):
+        return [
+            {'label': 'Round #', 'name': 'round'   , 'value': self.round},
+            {'label': 'Date: ' , 'name': 'date'    , 'value': self.date},
+            {'type' : 'hidden' , 'name': 'seasonid', 'value': self.fkSeason.id}
+        ]
 
 
 # Participation and score of a team in a match

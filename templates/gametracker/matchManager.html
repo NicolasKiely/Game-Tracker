@@ -11,4 +11,10 @@
       {{ season.nav_link | safe }}
     </div>
   {% close_box %}
+
+  {# Add matches form #}
+  {% open_box %}
+    <h2>Add Match</h2>
+    {{ form | common_form | safe }}
+  {% close_box %}
 {% endblock %}

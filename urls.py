@@ -38,5 +38,6 @@ urlpatterns = [
 
     # Schedule pages
     url(r'^season/(?P<pkSeason>\d+)/match/editor/$',
-        match_views.editor_list, name='match_manager')
+        match_views.editor_list, name='match_manager'),
+    url(r'^match/add/$', match_views.add, name='add_match')
 ]

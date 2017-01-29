@@ -13,7 +13,11 @@ def editor_list(request, pkLeague):
     context = {
         'title' : 'Team Manager',
         'league': league,
-        'teams' : league.team_set.all()
+        'teams' : league.team_set.all(),
+        'form'  : {
+            'action': 'gametracker:add_team',
+            'fields': Team(fkLeague=league).to_form_fields()
+        }
     }
     return core.render(request, 'gametracker/teamManager.html', **context)
 
@@ -25,7 +29,11 @@ def editor(request, pk):
     context = {
         'title' : 'Team Editor',
         'team'  : team,
-        'league': team.fkLeague
+        'league': team.fkLeague,
+        'form'  : {
+            'action': 'gametracker:edit_team',
+            'fields': team.to_form_fields()
+        }
     }
     return core.render(request, 'gametracker/teamEditor.html', **context)
 
@@ -33,7 +41,7 @@ def editor(request, pk):
 @login_required
 def add(request):
     ''' Post for adding new team '''
-    league_id = request.POST['league']
+    league_id = request.POST['leagueid']
     name = request.POST['name']
     lname = request.POST['long']
     home = request.POST['home']
@@ -52,7 +60,7 @@ def edit(request):
     ''' Post for editting team data '''
     team = get_object_or_404(Team, pk=request.POST['teamid'])
     team.name = request.POST['name']
-    team.lname = request.POST['long']
+    team.longName = request.POST['long']
     team.home = request.POST['home']
     team.save()
 
