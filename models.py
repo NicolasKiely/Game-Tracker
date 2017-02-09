@@ -89,7 +89,7 @@ class Match(models.Model):
     def to_form_fields(self):
         return [
             {'label': 'Round #', 'name': 'round'   , 'value': self.round},
-            {'label': 'Date: ' , 'name': 'date'    , 'value': self.date},
+            {'label': 'Date: ' , 'name': 'date'    , 'value': self.date.date()},
             {'type' : 'hidden' , 'name': 'seasonid', 'value': self.fkSeason.id}
         ]
 
