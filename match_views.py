@@ -22,7 +22,19 @@ def editor_list(request, pkSeason):
     }
     return core.render(request, 'gametracker/matchManager.html', **context)
 
+
 @login_required
 def add(request):
     ''' Post handler for adding team '''
-    pass
+    # Add Empty match and goto page for adding participants
+    fround    = request.POST['round']
+    fdate     = request.POST['date']
+    fseasonid = request.POST['seasonid']
+
+    season = get_object_or_404(Season, pk=fseasonid)
+    match = Match(round=fround, date=fdate, fkSeason=season)
+    match.save()
+
+    return HttpResponseRedirect(
+        reverse('gametracker:match_manager', args=(fseasonid,))
+    )
