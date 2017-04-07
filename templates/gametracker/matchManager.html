@@ -17,4 +17,25 @@
     <h2>Add Match</h2>
     {{ form | common_form | safe }}
   {% close_box %}
+
+  {# List of matches #}
+  {% open_box %}
+    <h2>Matches</h2>
+
+    <table class="table table-striped">
+      <tr>
+        <th>Round</th>
+        <th>Date</th>
+        <th>URL</th>
+      </tr>
+
+      {% for match in matches %}
+      <tr>
+        <td>{{ match.round }}</td>
+        <td>{{ match.date }}</td>
+        <td>{{ match.edit_link|safe }} | {{ match.view_link|safe }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% close_box %}
 {% endblock %}

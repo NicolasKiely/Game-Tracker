@@ -24,6 +24,12 @@ def editor_list(request, pkSeason):
 
 
 @login_required
+def editor(request, pk):
+    ''' Editor for a match '''
+    match = get_object_or_404(Match, pk=pk)
+
+
+@login_required
 def add(request):
     ''' Post handler for adding team '''
     # Add Empty match and goto page for adding participants
@@ -38,3 +44,8 @@ def add(request):
     return HttpResponseRedirect(
         reverse('gametracker:match_manager', args=(fseasonid,))
     )
+
+
+def view(request, pk):
+    ''' Public view of match '''
+    pass

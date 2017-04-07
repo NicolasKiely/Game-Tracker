@@ -86,6 +86,15 @@ class Match(models.Model):
     # Date of match, optional
     date = models.DateField(null=True)
 
+    def edit_link(self):
+        return edit_link('gametracker:match_editor', (self.pk,))
+
+    def view_link(self):
+        return view_link(
+            'gametracker:match_view', (self.pk,), 
+            self.date.strftime('%Y_%m_%d') +'#'+ str(self.round)
+        )
+
     def to_form_fields(self):
         return [
             {'label': 'Round #', 'name': 'round'   , 'value': self.round},

@@ -39,5 +39,8 @@ urlpatterns = [
     # Schedule pages
     url(r'^season/(?P<pkSeason>\d+)/match/editor/$',
         match_views.editor_list, name='match_manager'),
+    url(r'^match/editor/(?P<pk>\d+)/\w*$',
+        match_views.editor, name='match_editor'),
+    url(r'^match/view/(?P<pk>\d+)/\w*$', match_views.view, name='match_view'),
     url(r'^match/add/$', match_views.add, name='add_match')
 ]
