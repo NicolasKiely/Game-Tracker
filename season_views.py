@@ -30,6 +30,7 @@ def editor(request, pk):
         'title' : 'Season Editor',
         'season': season,
         'league': season.fkLeague,
+        'matches': season.match_set.all(),
         'form'  : {
             'action': 'gametracker:edit_season',
             'fields': season.to_form_fields()
